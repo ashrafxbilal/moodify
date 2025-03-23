@@ -18,20 +18,7 @@ Enhance your browsing with intuitive color adjustments that adapt to content sen
 
 ## Installation
 
-1. Download the latest release
-2. Open Firefox and navigate to `about:debugging`
+1. Download the latest release - https://addons.mozilla.org/en-US/firefox/addon/moodify/
+2. For testing, open Firefox and navigate to `about:debugging`
 3. Click "Load Temporary Add-on"
 4. Select manifest.json
-
-## Development
-
-### Technologies
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-- Lucide Icons
