@@ -1,0 +1,425 @@
+<!--
+    Moodify Vibe Color - Popup Interface
+    Hand-written code by Bilal Ashraf
+    No code generators or minifiers used
+    This file contains the popup UI and its styles
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moodify Vibe Color</title>
+    <style>
+        /* Using system fonts instead of remote Google Fonts */
+        
+        :root {
+            --primary-color: #0071e3;
+            --secondary-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --light-text: #86868b;
+            --border-radius: 12px;
+            --small-radius: 8px;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            width: 320px;
+            padding: 16px;
+            margin: 0;
+            color: var(--text-color);
+            background-color: #f5f5f7;
+            transition: var(--transition);
+            line-height: 1.3;
+            -webkit-font-smoothing: antialiased;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        h1 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-top: 0;
+            color: var(--text-color);
+            text-align: center;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .mood-section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 14px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            margin-bottom: 2px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mood-title {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--text-color);
+            font-size: 13px;
+            letter-spacing: -0.2px;
+        }
+        
+        .mood-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .mood-option {
+            padding: 8px 0;
+            text-align: center;
+            border-radius: var(--small-radius);
+            cursor: pointer;
+            font-size: 13px;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            font-weight: 400;
+        }
+        
+        .mood-option:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow);
+            background-color: rgba(0, 0, 0, 0.01);
+        }
+        
+        .mood-option.selected {
+            font-weight: 500;
+            box-shadow: 0 0 0 1.5px var(--primary-color);
+            border-color: transparent;
+        }
+        
+        .calm {
+            background-color: #f5faff;
+            color: #0091a1;
+        }
+        
+        .happy {
+            background-color: #fffef5;
+            color: #e6b325;
+        }
+        
+        .energetic {
+            background-color: #fffaf6;
+            color: #e05a30;
+        }
+        
+        .focused {
+            background-color: #f8f9ff;
+            color: #4355b9;
+        }
+        
+        .relaxed {
+            background-color: #f6faf7;
+            color: #3d9c42;
+        }
+        
+        .creative {
+            background-color: #fcf7ff;
+            color: #9d35b9;
+        }
+        
+        .slider-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        
+        .slider {
+            width: 100%;
+            height: 3px;
+            -webkit-appearance: none;
+            background: #e8e8e8;
+            outline: none;
+            border-radius: 1.5px;
+            margin: 10px 0;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            cursor: pointer;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+            border: 1.5px solid white;
+        }
+        
+        .toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        
+        .toggle {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+        
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #e8e8e8;
+            transition: var(--transition);
+            border-radius: 24px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: var(--transition);
+            border-radius: 50%;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: var(--primary-color);
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(22px);
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: var(--small-radius);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 13px;
+            transition: var(--transition);
+            letter-spacing: -0.2px;
+        }
+        
+        .apply-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .apply-btn:hover {
+            background-color: #0062c3;
+            transform: translateY(-1px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .reset-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+        }
+        
+        .reset-btn:hover {
+            background-color: #ececec;
+            transform: translateY(-1px);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        }
+        
+        .footer {
+            font-size: 11px;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--light-text);
+            letter-spacing: -0.1px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Moodify Vibe Color</h1>
+    
+    <div class="container">
+        <!-- Enable/Disable Toggle -->
+        <div class="mood-section">
+            <div class="toggle-container">
+                <span>Enable Color Modifications</span>
+                <label class="toggle">
+                    <input type="checkbox" id="enableToggle" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div class="toggle-container" style="margin-top: 8px;">
+                <span>Follow System Dark/Light Mode</span>
+                <label class="toggle">
+                    <input type="checkbox" id="systemThemeToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Mood Selection -->
+        <div class="mood-section">
+            <span class="mood-title">Select Your Mood</span>
+            <div class="mood-options">
+                <div class="mood-option calm" data-mood="calm">Calm</div>
+                <div class="mood-option happy" data-mood="happy">Happy</div>
+                <div class="mood-option energetic" data-mood="energetic">Energetic</div>
+                <div class="mood-option focused" data-mood="focused">Focused</div>
+                <div class="mood-option relaxed" data-mood="relaxed">Relaxed</div>
+                <div class="mood-option creative" data-mood="creative">Creative</div>
+            </div>
+        </div>
+        
+        <!-- Intensity Controls -->
+        <div class="mood-section">
+            <span class="mood-title">Adjust Intensity</span>
+            <div class="slider-container">
+                <div class="slider-label">
+                    <span>Color Saturation</span>
+                    <span id="saturationValue">50%</span>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="slider" id="saturationSlider">
+            </div>
+            
+            <div class="slider-container" style="margin-top: 12px;">
+                <div class="slider-label">
+                    <span>Color Brightness</span>
+                    <span id="brightnessValue">50%</span>
+                </div>
+                <input type="range" min="0" max="100" value="50" class="slider" id="brightnessSlider">
+            </div>
+        </div>
+        
+        <!-- Site-specific Settings -->
+        <div class="mood-section">
+            <div class="toggle-container">
+                <span>Site-specific Settings</span>
+                <label class="toggle">
+                    <input type="checkbox" id="siteSpecificToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div id="siteSpecificControls" style="margin-top: 12px; display: none;">
+                <div style="font-size: 13px; margin-bottom: 8px;">
+                    <span>Current site: </span>
+                    <span id="currentSite" style="font-weight: 500;">-</span>
+                </div>
+                <button class="apply-btn" id="saveSiteSettingsBtn" style="width: 100%; margin-top: 8px;">Save for this site</button>
+            </div>
+        </div>
+        
+        <!-- Time-based Automation -->
+        <div class="mood-section">
+            <div class="toggle-container">
+                <span>Time-based Automation</span>
+                <label class="toggle">
+                    <input type="checkbox" id="timeBasedToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div id="timeBasedControls" style="margin-top: 12px; display: none;">
+                <div style="font-size: 13px; margin-bottom: 8px;">
+                    <div class="slider-label" style="margin-bottom: 8px;">
+                        <span>Daytime Mood (6AM-6PM)</span>
+                        <select id="dayMoodSelect" style="padding: 4px; border-radius: 4px; border: 1px solid #e8e8e8;">
+                            <option value="calm">Calm</option>
+                            <option value="happy">Happy</option>
+                            <option value="energetic">Energetic</option>
+                            <option value="focused" selected>Focused</option>
+                            <option value="relaxed">Relaxed</option>
+                            <option value="creative">Creative</option>
+                        </select>
+                    </div>
+                    <div class="slider-label">
+                        <span>Evening Mood (6PM-6AM)</span>
+                        <select id="nightMoodSelect" style="padding: 4px; border-radius: 4px; border: 1px solid #e8e8e8;">
+                            <option value="calm" selected>Calm</option>
+                            <option value="happy">Happy</option>
+                            <option value="energetic">Energetic</option>
+                            <option value="focused">Focused</option>
+                            <option value="relaxed">Relaxed</option>
+                            <option value="creative">Creative</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Color Scheme Customization -->
+        <div class="mood-section">
+            <div class="toggle-container">
+                <span>Custom Colors</span>
+                <label class="toggle">
+                    <input type="checkbox" id="customColorsToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+            <div id="colorCustomizationControls" style="margin-top: 12px; display: none;">
+                <div style="font-size: 13px; margin-bottom: 12px;">
+                    <div class="slider-label" style="margin-bottom: 8px;">
+                        <span>Background Color</span>
+                        <input type="color" id="bgColorPicker" style="width: 30px; height: 30px; border: none; padding: 0; background: none;">
+                    </div>
+                    <div class="slider-label" style="margin-bottom: 8px;">
+                        <span>Text Color</span>
+                        <input type="color" id="textColorPicker" style="width: 30px; height: 30px; border: none; padding: 0; background: none;">
+                    </div>
+                    <div class="slider-label">
+                        <span>Link Color</span>
+                        <input type="color" id="linkColorPicker" style="width: 30px; height: 30px; border: none; padding: 0; background: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hidden options that work automatically -->
+        <div style="display: none;">
+            <input type="checkbox" id="imagesToggle">
+            <input type="checkbox" id="readabilityToggle" checked>
+        </div>
+        
+        <!-- Buttons removed as per new design -->
+    </div>
+    
+    <div class="footer">
+        Crafted by Bilal Ashraf
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>
+

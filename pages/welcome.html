@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Moodify Vibe Color</title>
+    <style>
+        /* Using system fonts instead of remote Google Fonts */
+        
+        :root {
+            --primary-color: #4a2aad;
+            --secondary-color: #f5f5f7;
+            --text-color: #1d1d1f;
+            --light-text: #86868b;
+            --border-radius: 12px;
+            --small-radius: 8px;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            --transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.4;
+            color: var(--text-color);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: var(--secondary-color);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 28px;
+            margin-top: 0;
+            letter-spacing: -0.5px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .container {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            backdrop-filter: blur(10px);
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 20px;
+            margin-top: 40px;
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding-bottom: 12px;
+        }
+        
+        p {
+            color: var(--text-color);
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        
+        .feature {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 15px;
+        }
+        
+        .feature:before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .step {
+            margin-bottom: 16px;
+            padding-left: 32px;
+            position: relative;
+            font-size: 15px;
+        }
+        
+        .step-number {
+            position: absolute;
+            left: 0;
+            background-color: var(--primary-color);
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tip {
+            background-color: rgba(74, 42, 173, 0.05);
+            padding: 16px 20px;
+            border-radius: var(--small-radius);
+            margin: 20px 0;
+            font-size: 14px;
+            border: 1px solid rgba(74, 42, 173, 0.1);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 13px;
+            color: var(--light-text);
+            letter-spacing: -0.2px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="../icons/icon128.png" alt="Moodify Vibe Color Logo" class="logo">
+        <h1>Welcome to Moodify Vibe Color</h1>
+        <p>Transform your browsing experience by adapting website colors to match your mood</p>
+    </header>
+    
+    <div class="container">
+        <section>
+            <h2>About Moodify Vibe Color</h2>
+            <p>Moodify Vibe Color is an intelligent browser extension that enhances your web browsing experience by dynamically changing the color scheme of websites based on the mood you select. Whether you're feeling calm, energetic, focused, or relaxed, our extension adapts color palettes to complement your current state of mind.</p>
+        </section>
+
+        <section>
+            <h2>Key Features</h2>
+            <div class="feature">
+                <strong>Mood-Based Color Adaptation</strong>: Choose from a variety of mood settings that adjust website colors accordingly
+            </div>
+            <div class="feature">
+                <strong>Instant Switching</strong>: Seamlessly switch between different mood themes with a single click
+            </div>
+            <div class="feature">
+                <strong>Website Compatibility</strong>: Works on most websites without breaking their functionality
+            </div>
+            <div class="feature">
+                <strong>Customization Options</strong>: Fine-tune color intensity and contrast to suit your preferences
+            </div>
+            <div class="feature">
+                <strong>Easy Toggle</strong>: Quickly enable or disable the extension when needed
+            </div>
+        </section>
+
+        <section>
+            <h2>Quick Start Guide</h2>
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Access the Extension</strong>: Click on the Moodify Vibe Color icon in your browser toolbar
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Select Your Mood</strong>: Choose from the mood options (Calm, Energetic, Focused, Relaxed, etc.)
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Adjust Intensity</strong>: Use the sliders to customize the color intensity if needed
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Apply Changes</strong>: Click "Apply" to transform the current webpage
+            </div>
+            <div class="step">
+                <span class="step-number">5</span>
+                <strong>Save Preferences</strong>: Your settings will be remembered for future browsing sessions
+            </div>
+        </section>
+
+        <section>
+            <h2>Tips for Best Experience</h2>
+            <div class="tip">
+                <strong>Website Compatibility</strong>: Some websites with strict styling may not fully adapt to color changes. You can disable the extension for specific sites from the options panel.
+            </div>
+            <div class="tip">
+                <strong>Performance Optimization</strong>: For very large or complex websites, consider reducing the color intensity to improve performance.
+            </div>
+            <div class="tip">
+                <strong>Preset Schedules</strong>: You can set up scheduled mood changes in the advanced settings - for example, switching to "Focused" mode during work hours.
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Crafted by Bilal Ashraf</p>
+        <p>Version 1.0.0</p>
+    </footer>
+</body>
+</html>
+
